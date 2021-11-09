@@ -4,13 +4,13 @@ set -e
 
 usage(){
 
-    echo "Usage: $0 [FILE] [EMAIL ADDRESS]"
+    echo "Usage: $0 <file> <user@email.com>"
     echo ""
     exit 1
 
 }
 
-(( ${#} > 0 )) || {
+(( "${#}" > 0 )) || {
 
     echo "No arguments supplied!"
     usage
@@ -30,17 +30,16 @@ check_size(){
 	echo "${size}"
 }
 
-SendEmail(){
+send_mail(){
 
-	local smtp="smtp=XXX"
 	local from="me@company.com"
-	local sub="[FILE2EMAIL] Shared file: $(basename ${1})"
+	local sub="File share robot"
 	local att="${1}"
 	local to="${2:-lukasz.kisiel@company.com}"
 	local name="${to%%.*}"
 
 	tPrint "Sending file ${att} to ${to} (...)"
-	echo -e "Hello ${name^},\nShared file: $(basename ${1}) taken from $(hostname)\n\nMessage generated automatically." | $(command -v mailx) -a "${att}" -S "${smtp}" -r "${from}" -s "${sub}" "${to}"
+	echo -e "Hello ${name^},\nShared file: $(basename ${1}) taken from $(hostname)\n\nMessage generated automatically." | $(command -v mailx) -a "${att}" -r "${from}" -s "${sub}" "${to}"
 
 }
 
@@ -50,8 +49,8 @@ SendEmail(){
 }
 
 (( "$(check_size ${1})" < 25000 )) || {
-	tPrint "File is to large! Try to zip it!"
+	tPrint "File is to large!"
 	exit 0
 }
 
-SendEmail "${1}" "${2}" && tPrint "DONE"
+send_email "${1}" "${2}" && tPrint "DONE"
