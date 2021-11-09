@@ -32,11 +32,11 @@ check_size(){
 
 SendEmail(){
 
-	local smtp="smtp=smtp.oneadr.net"
-	local from="dlpl-FRC-IT-DevOps@nordea.com"
+	local smtp="smtp=XXX"
+	local from="me@company.com"
 	local sub="[FILE2EMAIL] Shared file: $(basename ${1})"
 	local att="${1}"
-	local to="${2:-lukasz.kisiel@nordea.com}"
+	local to="${2:-lukasz.kisiel@company.com}"
 	local name="${to%%.*}"
 
 	tPrint "Sending file ${att} to ${to} (...)"
