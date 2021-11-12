@@ -17,7 +17,7 @@ send_email() {
         local body="${2}"
         local mail_cmd="/usr/bin/mailx -s"
 
-        ${mail_cmd} "${subject}" -S smtp=smtp.oneadr.net -S from="dlpl-FRC-IT-DevOps@nordea.com" dlcomTOSITFRC@nordea.com  <<< "
+        ${mail_cmd} "${subject}" -S smtp=smtp.pl -S from="email@address.pl" email@eee.pl  <<< "
 Hello Team,
 
 Please be informed that I have cleand up following files on ${HOSTNAME}:
