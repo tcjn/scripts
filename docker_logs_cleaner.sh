@@ -46,7 +46,7 @@ clean_up(){
         for f in "${to_check[@]}"
         do
                 tPrint " - Cleaning file ${f##*/} with size $(check_size ${f}) MB."
-                $truncate_cmd "${f}"
+                ${truncate_cmd} "${f}"
         done
 
         send_email "[DOCKER Logs cleaner]" "$(printf '%s\n' ${to_check[@]})"
